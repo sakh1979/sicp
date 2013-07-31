@@ -23,3 +23,53 @@
                (+ counter 1)
                max-count)))
 
+; ---------------------------------------------------------------------------
+; Example 1.2.2
+;
+(define (fib n)
+  (fib-iter 1 0 n))
+
+(define (fib-iter a b count)
+  (if (= count 0) b
+      (fib-iter (+ a b) a (- count 1))))
+
+; ---------------------------------------------------------------------------
+; How many different ways can we make change of $ 1.00, 
+; given half-dollars, quarters, dimes, nickels, and pennies? 
+; More generally, can we write a procedure to compute the number of 
+; ways to change any given amount of money?
+(define (count-change amount) 
+  (cc amount 5))
+
+(define (cc amount kinds-of-coins)
+  (cond ((= amount 0) 1)
+        ((or (< amount 0) (= kinds-of-coins 0)) 0)
+        (else (+ (cc amount (- kinds-of-coins 1)) 
+                 (cc (- amount (first-denomination kinds-of-coins))
+                     kinds-of-coins)))))
+
+(define (first-denomination kinds-of-coins)
+  (cond ((= kinds-of-coins 1) 1)
+        ((= kinds-of-coins 2) 5)
+        ((= kinds-of-coins 3) 10)
+        ((= kinds-of-coins 4) 25)
+        ((= kinds-of-coins 5) 50)))
+
+; ---------------------------------------------------------------------------
+; Example 1.2.6: Testing for Primality (Searching for divisors)
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (square n) (* n n))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
