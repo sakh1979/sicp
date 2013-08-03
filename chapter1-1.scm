@@ -1,54 +1,24 @@
-(define (square x) (* x x))
-
-(define (sum-of-square x y) (+ (square x) (square y)))
-
-(define (f a) (sum-of-square (+ a 1) (* a 2)))
-
-; ---------------------------------------------------------------------------
-; Exercise 1.3
-(define (largest-two-square-sum x y z)
-  (cond ((= x (max x y)) (sum-of-square x (max y z)))
-        ((= y (max x y)) (sum-of-square y (max x z)))))
-
-; ---------------------------------------------------------------------------
-; Exercise 1.4
-(define (a-plus-abs-b a b)
-  ((if (> b 0) + -) a b))
-
-; ---------------------------------------------------------------------------
-; Example 1.1.7
-(define (sqrt-iter guess x)
-  (if (good-enough? guess x)
-    guess
-    (sqrt-iter (improve guess x)
-               x)))
-
-(define (improve guess x)
-  (average guess (/ x guess)))
-
-(define (average x y)
-  (/ (+ x y) 2))
-
-(define (good-enough? guess x)
-  (< (abs (- (square guess) x)) 0.001))
-
-(define (sqrt x)
-  (sqrt-iter 1.0 x))
-
-; ---------------------------------------------------------------------------
-; Exercise 1.6
-(define (new-if predicate then-clause else-clause)
-  (cond (predicate then-clause)
-        (else else-clause)))
-
-(define (sqrt x)
-  (define (good-enough? guess)
-    (< (abs (- (square guess) x)) 0.0001))
-  (define (improve guess)
-    (average guess (/ x guess)))
-  (define (sqrt-iter guess)
-    (if (good-enough? guess) guess
-    (sqrt-iter (improve guess))))
-  (sqrt-iter 1.0)
-)
-
+;;; Exercise 1.1
+;;; Below is a sequence of expressions. What is the result printed by the
+;;; interpreter in response to each expression? Assume that the sequence is to
+;;; be evaluated in the order in which it is presented.
+;;; 10                                      => 10
+;;; (+ 5 3 4)                               => 12
+;;; (- 9 1)                                 => 8
+;;; (/ 6 2)                                 => 3
+;;; (+ (* 2 4) (- 4 6))                     => 6
+;;; (define a 3)                            => a = 3
+;;; (define b (+ a 1))                      => b = 4
+;;; (+ a b (* a b))                         => 19
+;;; (= a b)                                 => #t
+;;; (if (and (> b a) (< b (* a b)))         => b
+;;;     b
+;;;     a)
+;;; (cond ((= a 4) 6)                       => 16
+;;;       ((= b 4) (+ 6 7 a))
+;;;       (else 25))
+;;; (+ 2 (if (> b a) b a))                  => 6
+;;; (* (cond ((> a b) a)                    => 16
+;;;          ((< a b) b)
+;;;          (else -1))
+;;;    (+ a 1))
