@@ -30,3 +30,24 @@
 (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5)))))
     (* 3 (- 6 2) (- 2 7)))
 
+
+;;; Exercise 1.3
+;;; Define a procedure that takes three numbers as arguments and returns the
+;;; sum of the squares of the two larger numbers.
+(define (square x) (* x x))
+(define (sum-of-square x y)
+  (+ (square x) (square y)))
+(define (largest-sum-of-square a b c)
+  (cond ((= a (max a b)) (sum-of-square a (max b c)))
+        ((= b (max a b)) (sum-of-square b (max a c)))))
+
+
+;;; Exercise 1.4
+;;; Observe that our model of evaluation allows for combinations whose 
+;;; operators are compound expressions. Use this observation to 
+;;; describe the behavior of the following procedure
+;;; (define (a-plus-abs-b a b)
+;;;   ((if (> b 0) + -) a b))
+;;; 
+;;; => The if statement returns either a - or +, which is then applied
+;;; => to the operands.
