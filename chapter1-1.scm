@@ -51,3 +51,37 @@
 ;;; 
 ;;; => The if statement returns either a - or +, which is then applied
 ;;; => to the operands.
+
+
+;;; Exercise 1.5
+;;; Ben Bitdiddle has invented a test to determine whether the interpreter 
+;;; he is faced with is using applicative-order evaluation or normal-order 
+;;; evaluation. He defines the following two procedures:
+;;; (define (p) (p))
+;;; 
+;;; (define (test x y)
+;;;   (if (= x 0)
+;;;       0
+;;;       y))
+;;;
+;;; Then he evaluates the expression: 
+;;;
+;;; (test 0 (p))
+;;;
+;;; What behavior will Ben observe with an interpreter that uses 
+;;; applicative-order evaluation? What behavior will he observe with an 
+;;; interpreter that uses normal-order evaluation? Explain your answer. 
+;;; (Assume that the evaluation rule for the special form if is the same 
+;;; whether the interpreter is using normal or applicative order: The 
+;;; predicate expression is evaluated first, and the result determines 
+;;; whether to evaluate the consequent or the alternative expression.)
+;;;
+;;; =>  The alternative ``fully expand and then reduce'' evalutation method
+;;;     is known as ``normal-oder evaluation'', in contrast to the ``evaluate
+;;;     the arguments and then apply'' method that the interpreter acutally
+;;;     uses, which is called ``applicative order evaluation''.
+;;;
+;;;     Both the ``applicative-oder evaluation'' and 
+;;;     ``normal-order evaluation'' interpreter will go into a infinite 
+;;;     loop. Because, no matter what, (define (p) (p)) will never
+;;;     evaluate to anything.
