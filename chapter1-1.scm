@@ -150,7 +150,5 @@
 (define (good-enough? guess old-guess x)
   (< (abs (- guess old-guess)) (* guess 0.001)))
 
-(define (sqrt x)
+(define (new-sqrt x)
   (sqrt-iter 1.0 2.0 x))
-
-
