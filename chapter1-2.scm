@@ -292,11 +292,25 @@
 ;;; by 2. Using these, design a multiplication procedure analogous to 
 ;;; fast-expt that uses a logarithmic number of steps.
 
+(define double (lambda (x) (+ x x)))
+
+(define halve (lambda (x) (/ x 2)))
+
+
 (define (fast-mult a b)
+  (cond ((= b 0) 0)
+        ((even? b) (double (fast-mult a (halve b))))
+        (else (+ a (fast-mult a (- b 1))))))
 
-  (define double (lambda (x) (+ x x)))
 
-  (define halve (lambda (x) (/ x 2)))
+
+;;; Exercise 1.18
+;;; Using the results of exercise 1.16 and 1.17, devise a procedure
+;;; that generates an iterative process for multiplying two integers
+;;; in terms of adding, doubling, and halving and uses a logarithmic
+;;; number of steps.
+
+(define (mult a b)
 
   (define (mult-iter n sum)
     (cond ((= n 0) sum)
