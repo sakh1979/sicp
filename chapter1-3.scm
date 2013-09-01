@@ -67,3 +67,15 @@
           (else (/ (+ n 1) (+ n 2)))))
 
   (* (product term 1 inc x) 4.0))
+
+
+
+;;; ---------------------------------------------------------------------
+;;; Exercise 1.32
+
+(define (f g)
+  (g 2))
+
+;;; => We get an error: "Operator is not a PROCEDURE"
+;;;    (2 2)
+
