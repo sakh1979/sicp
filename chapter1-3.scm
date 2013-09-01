@@ -39,3 +39,31 @@
   
   (iter a 0))
 
+
+
+;;; ---------------------------------------------------------------------
+;;; Exercise 1.31
+
+(define (product term a next b)
+
+  (define (iter a result)
+    (cond ((> a b) result)
+          (else (iter (next a) (* result (term a))))))
+
+  (iter a 1))
+
+
+(define (factorial n)
+
+  (define (identity x) x)
+
+  (product identity 1 inc n))
+
+
+(define (pi-approx x)
+
+  (define (term n)
+    (cond ((even? n) (/ (+ n 2) (+ n 1)))
+          (else (/ (+ n 1) (+ n 2)))))
+
+  (* (product term 1 inc x) 4.0))
