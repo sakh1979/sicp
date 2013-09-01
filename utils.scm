@@ -51,3 +51,15 @@
 
 (define (sum-of-square a b)
   (+ (square a) (square b)))
+
+
+;;; ---------------------------------------------------------------------
+;;; increment integer by one
+
+(define (inc n) (+ n 1))
+
+
+;;; ---------------------------------------------------------------------
+;;; decrement integer by one
+
+(define (dec n) (- n 1))
