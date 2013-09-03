@@ -63,3 +63,9 @@
 ;;; decrement integer by one
 
 (define (dec n) (- n 1))
+
+
+;;; ---------------------------------------------------------------------
+;;; average
+
+(define average (lambda (a b) (/ (+ a b) 2)))
