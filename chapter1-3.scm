@@ -119,3 +119,26 @@
 
 (define (x-to-the-x y)
   (fixed-point-modify (lambda (x) (/ (log y) (log x))) 10.0))
+
+
+
+
+;;; ---------------------------------------------------------------------
+;;; Exercise 1.37
+
+;;; Recursive Version
+;;;
+(define (cont-frac n d k)
+  (cond ((= k 0) 0)
+        (else (/ (n k) (+ (d k) (cont-frac n d (- k 1)))))))
+
+
+;;; Iterative Version
+;;;
+(define (cont-frac-iter n d k)
+  (define (iter counter accu)
+    (let ((num      (n counter))
+          (denum    (d counter)))
+      (cond ((= counter k) accu)
+            (else (iter (+ counter 1) (/ num (+ denum accu)))))))
+  (iter 0 0))
