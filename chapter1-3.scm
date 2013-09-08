@@ -142,3 +142,30 @@
       (cond ((= counter k) accu)
             (else (iter (+ counter 1) (/ num (+ denum accu)))))))
   (iter 0 0))
+
+
+
+
+;;; ---------------------------------------------------------------------
+;;; Exercise 1.41
+
+(define (double f)
+  (lambda (x) (f (f x))))
+
+
+
+;;; ---------------------------------------------------------------------
+;;; Exercise 1.42
+
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+
+
+;;; ---------------------------------------------------------------------
+;;; Exercise 1.43
+
+(define (repeated f n)
+  (cond ((< n 1) (lambda (x) x))
+        (else (compose f (repeated f (- n 1))))))
+
