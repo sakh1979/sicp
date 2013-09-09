@@ -50,3 +50,41 @@
 (define (make-negative x)
   (cond ((< x 0) x)
         (else (* x -1))))
+
+
+
+
+;;; ------------------------------------------------------------------------
+;;; Exercise 2.2
+
+(define (make-point x y)
+  (cons x y))
+
+(define (x-point p)
+  (car p))
+
+(define (y-point p)
+  (cdr p))
+
+(define (start-segment x)
+  (car x))
+
+(define (end-segment x)
+  (cdr x))
+
+(define (make-segment start end)
+  (cons start end))
+
+(define (midpoint-segment segment)
+  (let ((p1 (start-segment  segment))
+        (p2 (end-segment    segment)))
+    (make-point (/ (+ (x-point p1) (x-point p2)) 2)
+                (/ (+ (y-point p1) (y-point p2)) 2))))
+
+(define (print-point p)
+  (display "(")
+  (display (x-point p))
+  (display ",")
+  (display (y-point p))
+  (display ")")
+  (newline))
