@@ -69,3 +69,24 @@
 
 (define (square-list items)
   (map square items))
+
+
+
+;;; Exercise 2.22
+
+;;; => This produces the answer list in reverse order because
+;;; => the list is being constructed by adding the newer item
+;;; => in front of the list.
+(define (square-list items)
+  (define (iter things answer)
+    (cond ((null? things) answer)
+          (else (iter (cdr things) (cons (square (car things)) answer)))))
+  (iter items nil))
+
+;;; => And, this does not work because we are constructing individual
+;;; => list on each iteration
+(define (square-list items)
+  (define (iter things answer)
+    (cond ((null? things) answer)
+          (else (iter (cdr things) (cons answer (square (car things)))))))
+  (iter items nil))
