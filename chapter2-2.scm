@@ -44,3 +44,16 @@
 
 (define (first-denomination alist)
   (car alist))
+
+
+
+;;; Exercise 2.20
+
+(define (same-parity x . y)
+  (let ((parity (remainder x 2)))
+    (define (helper input output)
+      (cond ((null? input) output)
+            ((= (remainder (car input) 2) parity)
+             (helper (cdr input) (append output (list (car input)))))
+            (else (helper (cdr input) output))))
+    (helper y (list x))))
