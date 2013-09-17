@@ -57,3 +57,15 @@
              (helper (cdr input) (append output (list (car input)))))
             (else (helper (cdr input) output))))
     (helper y (list x))))
+
+
+
+
+;;; Exercise 2.21
+
+(define (square-list items)
+  (cond ((null? items) nil)
+        (else (cons (square (car items)) (square-list (cdr items))))))
+
+(define (square-list items)
+  (map square items))
