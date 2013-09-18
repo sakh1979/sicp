@@ -90,3 +90,11 @@
     (cond ((null? things) answer)
           (else (iter (cdr things) (cons answer (square (car things)))))))
   (iter items nil))
+
+
+
+;;; Exercise 2.23
+
+(define (for-each proc items)
+  (cond ((null? items) (newline))
+        (else (proc (car items)) (for-each proc (cdr items)))))
