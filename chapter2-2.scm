@@ -98,3 +98,21 @@
 (define (for-each proc items)
   (cond ((null? items) (newline))
         (else (proc (car items)) (for-each proc (cdr items)))))
+
+
+
+;;; Exercise 2.24
+
+;;; => Result printed by the interpreter
+;;; => (1 (2 (3 4)))
+
+;;; => The corresponding interpretation as a tree:
+;;;                       (1 (2 (3 4)))
+;;;                             /\
+;;;                            /  \
+;;;                           1  / \
+;;;                             /   \
+;;;                            2   / \
+;;;                               /   \
+;;;                              3     4 
+;;;                              
