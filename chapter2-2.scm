@@ -134,8 +134,30 @@
 ;;; Exercise 2.26
 ;;;
 ;;; (define x (list 1 2 3))
-;;; (define x (list 1 2 3))
+;;; (define x (list 4 5 6))
 ;;;
 ;;; (append x y) => (1 2 3 4 5 6)
 ;;; (cons x y)   => ((1 2 3) 4 5 6)
 ;;; (list x y)   => ((1 2 3) (4 5 6))
+
+
+
+;;; Exercise 2.27
+
+;;; very elegant solution from sicp solution
+(define (deep-reverse alist)
+  (cond ((null? alist) '())
+        ((not (pair? alist)) alist)
+        (else (append (deep-reverse (cdr alist))
+                      (list (deep-reverse (car alist)))))))
+
+
+;;; my version
+;;; note: I like the above version a lot better!!!
+(define (deep-reverse alist)
+  (let ((shallow-reverse-list (reverse alist)))
+    (define (iter input answer)
+      (cond ((null? input) answer)
+            ((pair? (car input)) (iter (cdr input) (append answer (list (reverse (car input))))))
+            (else (iter (cdr input) (list answer (car input))))))
+    (iter shallow-reverse-list '())))
