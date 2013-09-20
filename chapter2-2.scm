@@ -161,3 +161,16 @@
             ((pair? (car input)) (iter (cdr input) (append answer (list (reverse (car input))))))
             (else (iter (cdr input) (list answer (car input))))))
     (iter shallow-reverse-list '())))
+
+
+
+
+;;; Exercise 2.28
+
+;;; I think this is an elegant solution I came up with
+;;; very happy with it
+(define (fringe tree)
+  (cond ((null? tree) '())
+        ((not (pair? tree)) (list tree))
+        (else (append (fringe (car tree))
+                      (fringe (cdr tree))))))
