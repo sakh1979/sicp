@@ -70,10 +70,3 @@
 
 (define average (lambda (a b) (/ (+ a b) 2)))
 
-
-;;; ---------------------------------------------------------------------
-;;; gcd
-
-(define (gcd a b)
-  (cond ((= b 0) a)
-        (else (gcd b (remainder a b)))))
