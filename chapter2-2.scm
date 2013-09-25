@@ -174,3 +174,44 @@
         ((not (pair? tree)) (list tree))
         (else (append (fringe (car tree))
                       (fringe (cdr tree))))))
+
+
+
+
+;;; Exercise 2.29
+
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+(define (left-branch mobile)
+  (car mobile))
+
+(define (right-branch mobile)
+  (car (cdr mobile)))
+
+(define (branch-length branch)
+  (car branch))
+
+(define (branch-structure branch)
+  (car (cdr branch)))
+
+(define (mobile? m)
+  (and (pair? (left-branch m)) (pair? (right-branch m))))
+
+(define (weight-leaf? m)
+  (not (pair? (right-branch m))))
+
+(define (total-weight mobile)
+  (cond ((not (pair? mobile)) 0)
+        ((weight-leaf? mobile) (branch-structure mobile))
+        (else (+ (total-weight (left-branch mobile)) 
+                 (total-weight (right-branch mobile))))))
+
+(define (balanced? mobile)
+  (cond ((weight-leaf? mobile) (* (branch-length mobile) 
+                                  (branch-structure mobile)))
+        (else (= (* (branch-length (left-branch mobile)) (balanced? (left-branch mobile)))
+                 (* (branch-length (right-branch mobile)) (balanced? (right-branch mobile)))))))
