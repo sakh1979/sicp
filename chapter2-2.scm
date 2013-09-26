@@ -198,20 +198,26 @@
 (define (branch-structure branch)
   (car (cdr branch)))
 
-(define (mobile? m)
-  (and (pair? (left-branch m)) (pair? (right-branch m))))
-
-(define (weight-leaf? m)
-  (not (pair? (right-branch m))))
+(define (branch-weight branch)
+  (cond ((pair? (branch-structure branch)) 
+         (total-weight (branch-structure branch)))
+        (else (branch-structure branch))))
 
 (define (total-weight mobile)
-  (cond ((not (pair? mobile)) 0)
-        ((weight-leaf? mobile) (branch-structure mobile))
-        (else (+ (total-weight (left-branch mobile)) 
-                 (total-weight (right-branch mobile))))))
+  (+ (branch-weight (left-branch mobile))
+     (branch-weight (right-branch mobile))))
+
+(define (branch-torque branch)
+  (* (branch-length branch) (branch-weight branch)))
+
+(define (branch-balanced? branch)
+  (cond ((pair? (branch-structure branch)) 
+         (balanced? (branch-structure branch)))
+        (else true)))
 
 (define (balanced? mobile)
-  (cond ((weight-leaf? mobile) (* (branch-length mobile) 
-                                  (branch-structure mobile)))
-        (else (= (* (branch-length (left-branch mobile)) (balanced? (left-branch mobile)))
-                 (* (branch-length (right-branch mobile)) (balanced? (right-branch mobile)))))))
+  (and (= (branch-torque (left-branch mobile))
+          (branch-torque (right-branch mobile)))
+       (branch-balanced? (left-branch mobile))
+       (branch-balanced? (right-branch mobile))))
+
