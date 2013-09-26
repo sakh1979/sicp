@@ -221,3 +221,19 @@
        (branch-balanced? (left-branch mobile))
        (branch-balanced? (right-branch mobile))))
 
+
+
+
+;;; Exercise 2.30
+
+(define (square-tree tree)
+  (cond ((null? tree) '())
+        ((not (pair? tree)) (square tree))
+        (else (cons (square-tree (car tree))
+                    (square-tree (cdr tree))))))
+
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+         (cond ((pair? sub-tree) (square-tree sub-tree))
+               (else (square sub-tree))))
+       tree))
