@@ -251,3 +251,14 @@
 
 (define (square-tree tree) (tree-map square tree))
 
+
+
+
+
+;;; Exercise 2.32
+
+(define (subsets s)
+  (cond ((null? s) (list '()))
+        (else (let ((rest (subsets (cdr s))))
+                (append rest (map (lambda (x) (cons (car s) x))
+                                  rest))))))
