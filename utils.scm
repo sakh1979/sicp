@@ -70,3 +70,40 @@
 
 (define average (lambda (a b) (/ (+ a b) 2)))
 
+
+;;; ---------------------------------------------------------------------
+;;; Iteratively calculates Fibonacci number of n
+
+(define (fib n)
+  (define (iter a b counter)
+    (cond ((= counter n) a)
+	  (else (iter (+ a b) a (+ counter 1)))))
+  (iter 0 1 0))
+
+
+;;; ---------------------------------------------------------------------
+;;; Filter procedure
+
+(define (filter predicate sequences)
+  (cond ((null? sequences) nil)
+	((predicate (car sequences))
+	 (cons (car sequences)
+	       (filter predicate (cdr sequences))))
+	(else (filter predicate (cdr sequences)))))
+
+
+;;; ---------------------------------------------------------------------
+;;; Accumulate procedure
+
+(define (accumulate operation initial sequences)
+  (cond ((null? sequences) initial)
+	(else (operation (car sequences)
+			 (accumulate operation initial (cdr sequences))))))
+
+
+;;; ---------------------------------------------------------------------
+;;; Enumerate Interval procedure
+
+(define (enumerate-interval low high)
+  (cond ((> low high) nil)
+	(else (cons low (enumerate-interval (+ low 1) high)))))
