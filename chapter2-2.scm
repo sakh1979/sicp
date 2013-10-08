@@ -263,6 +263,7 @@
                 (append rest (map (lambda (x) (cons (car s) x))
                                   rest))))))
 
+
 ;;; Exercise 2.33
 
 (define (map p sequence)
@@ -273,3 +274,12 @@
 
 (define (length sequence)
   (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+
+;;; Exercise 2.34
+
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-terms)
+                (+ (* x higher-terms) this-coeff))
+              0
+              coefficient-sequence))
