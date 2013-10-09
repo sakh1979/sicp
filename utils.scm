@@ -115,3 +115,13 @@
 (define (enumerate-interval low high)
   (cond ((> low high) nil)
 	(else (cons low (enumerate-interval (+ low 1) high)))))
+
+
+;;; --------------------------------------------------------------------
+;;; Enumerate Tree
+
+(define (enumerate-tree tree)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (list tree))
+        (else (append (enumerate-tree (car tree))
+                      (enumerate-tree (cdr tree))))))
