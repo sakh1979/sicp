@@ -289,3 +289,11 @@
 
 (define (count-leaves t)
   (accumulate + 0 (map (lambda (x) 1) (enumerate-tree t))))
+
+
+;;; Exercise 2.36
+
+(define (accumulate-n operator initial seqs)
+  (cond ((null? (car seqs)) nil)
+        (else (cons (accumulate operator initial (map car seqs))
+                    (accumulate-n operator initial (map cdr seqs))))))
