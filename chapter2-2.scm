@@ -266,13 +266,13 @@
 
 ;;; Exercise 2.33
 
-(define (map p sequence)
+(define (my-map p sequence)
   (accumulate (lambda (x y) (cons (p x) y)) nil sequence))
 
-(define (append seq1 seq2)
+(define (my-append seq1 seq2)
   (accumulate cons seq2 seq1))
 
-(define (length sequence)
+(define (my-length sequence)
   (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
 
 
@@ -297,3 +297,22 @@
   (cond ((null? (car seqs)) nil)
         (else (cons (accumulate operator initial (map car seqs))
                     (accumulate-n operator initial (map cdr seqs))))))
+
+
+;;; Exercise 2.37
+
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+
+; Note: didn't have to write much of code,
+; but they were (at least for me) very difficult, and
+; mind boggling!
+(define (matrix-*-vector m v)
+  (map (lambda (row) (dot-product row v)) m))
+
+(define (transpose matrix)
+  (accumulate-n cons nil matrix))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map (lambda (rows) (matrix-*-vector cols rows)) m)))
