@@ -125,3 +125,20 @@
         ((not (pair? tree)) (list tree))
         (else (append (enumerate-tree (car tree))
                       (enumerate-tree (cdr tree))))))
+
+;;; fold-right
+
+(define (fold-right op initial sequence)
+  (cond ((null? sequence) initial)
+	(else (op (car sequence)
+                  (fold-right op initial (cdr sequence))))))
+
+
+;;; fold-left
+
+(define (fold-left op initial sequence)
+  (define (iter result rest)
+    (cond ((null? rest) rest)
+          (else (iter (op result (car rest))
+                      (cdr rest)))))
+  (iter initial sequence))
