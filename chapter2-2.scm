@@ -334,7 +334,7 @@
 ; (fold-left list nil (list 1 2 3)) => (((() 1) 2) 3)
 
 
-;;; Exercise 2.38
+;;; Exercise 2.39
 
 (define (fold-right-reverse sequence)
   (fold-right (lambda (x y) (append y (list x))) nil sequence))
