@@ -332,3 +332,12 @@
 ; (fold-left / 1 (list 1 2 3)) => 1/6
 ; (fold-right list nil (list 1 2 3)) => (1 (2 (3 ())))
 ; (fold-left list nil (list 1 2 3)) => (((() 1) 2) 3)
+
+
+;;; Exercise 2.38
+
+(define (fold-right-reverse sequence)
+  (fold-right (lambda (x y) (append y (list x))) nil sequence))
+
+(define (fold-left-reverse sequence)
+  (fold-left (lambda (x y) (cons y x)) nil sequence))
