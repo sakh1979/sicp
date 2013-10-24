@@ -365,3 +365,26 @@
      (map (lambda (j) (list i j))
           (enumerate-interval 1 (- i 1))))
    (enumerate-interval 1 n)))
+
+
+;;; Exercise 2.41
+
+(define (make-triple-sum triple)
+  (append triple (list (accumulate + 0 triple))))
+
+(define (ordered-triples n)
+  (flatmap
+   (lambda (i)
+     (flatmap
+      (lambda (j)
+        (map (lambda (k) (list i j k))
+             (enumerate-interval 1 (- j 1))))
+      (enumerate-interval 1 (- i 1))))
+   (enumerate-interval 1 n)))
+
+(define (ordered-triple-sum n s)
+  (define (triple-sum? triple)
+    (= (accumulate + 0 triple) s))
+  (map make-triple-sum
+       (filter triple-sum?
+               (ordered-triples n))))
