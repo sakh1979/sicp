@@ -174,3 +174,11 @@
 (define (remove item seq)
   (filter (lambda (x) (not (= x item)))
           seq))
+
+
+;;; list reference
+
+(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) (- n 1))))
